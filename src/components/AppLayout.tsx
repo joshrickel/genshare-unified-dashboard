@@ -56,7 +56,7 @@ export const AppLayout: React.FC = () => {
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h5" noWrap component="div" fontWeight={600}>
             Genshare Unified Dashboard
           </Typography>
         </Toolbar>
@@ -76,8 +76,8 @@ export const AppLayout: React.FC = () => {
         role="navigation"
       >
         <Toolbar /> {/* Spacer for AppBar */}
-        <Box sx={{ overflow: 'auto', mt: 1 }}>
-          <List>
+        <Box sx={{ overflow: 'auto', mt: 2, px: 1 }}>
+          <List sx={{ '& .MuiListItem-root': { mb: 0.5 } }}>
             {navigationItems.map((item) => {
               const isActive = location.pathname === item.path;
               
@@ -88,19 +88,28 @@ export const AppLayout: React.FC = () => {
                     to={item.path}
                     selected={isActive}
                     sx={{
+                      borderRadius: 2,
+                      py: 1.5,
+                      px: 2,
                       '&.Mui-selected': {
-                        backgroundColor: 'primary.light',
-                        opacity: 0.1,
+                        backgroundColor: 'secondary.light',
+                        color: 'secondary.contrastText',
                         '&:hover': {
-                          backgroundColor: 'primary.light',
-                          opacity: 0.15,
+                          backgroundColor: 'secondary.main',
                         },
+                        '& .MuiListItemIcon-root': {
+                          color: 'secondary.contrastText',
+                        },
+                      },
+                      '&:hover': {
+                        backgroundColor: 'grey.100',
                       },
                     }}
                   >
                     <ListItemIcon
                       sx={{
-                        color: isActive ? 'primary.main' : 'inherit',
+                        color: isActive ? 'inherit' : 'text.secondary',
+                        minWidth: 40,
                       }}
                     >
                       {item.icon}
@@ -109,8 +118,8 @@ export const AppLayout: React.FC = () => {
                       primary={item.text}
                       sx={{
                         '& .MuiListItemText-primary': {
-                          fontWeight: isActive ? 600 : 400,
-                          color: isActive ? 'primary.main' : 'inherit',
+                          fontWeight: isActive ? 600 : 500,
+                          fontSize: '0.95rem',
                         },
                       }}
                     />

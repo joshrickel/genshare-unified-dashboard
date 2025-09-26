@@ -5,21 +5,8 @@ import { CssBaseline } from '@mui/material';
 import { theme } from '@/config/theme';
 import { AppLayout } from '@/components/AppLayout';
 import { DealSourcing } from '@/pages/DealSourcing';
-
-// Placeholder components for routes that will be implemented later
-const AcquisitionPipeline: React.FC = () => (
-  <div>
-    <h2>Acquisition Pipeline</h2>
-    <p>Coming soon - Airtable embed for acquisition funnel management</p>
-  </div>
-);
-
-const DueDiligence: React.FC = () => (
-  <div>
-    <h2>Due Diligence</h2>
-    <p>Coming soon - Due diligence portal and management tools</p>
-  </div>
-);
+import { AcquisitionPipeline } from '@/pages/AcquisitionPipeline';
+import { DueDiligence } from '@/pages/DueDiligence';
 
 const App: React.FC = () => {
   return (
