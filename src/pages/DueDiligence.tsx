@@ -1,138 +1,90 @@
 import React from 'react';
 import {
   Typography,
-  Grid,
-  Card,
-  CardContent,
-  CardActions,
-  Button,
   Box,
   Container,
+  Paper,
+  CircularProgress,
   Alert,
 } from '@mui/material';
 import {
   Assessment,
-  Settings,
-  OpenInNew,
 } from '@mui/icons-material';
-import { serviceConfig } from '@/config/services';
 
-interface ServiceCardProps {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  url: string;
-  onNavigate: (url: string) => void;
-}
-
-const ServiceCard: React.FC<ServiceCardProps> = ({
-  title,
-  description,
-  icon,
-  url,
-  onNavigate,
-}) => {
-  const handleClick = () => {
-    onNavigate(url);
-  };
-
-  return (
-    <Card 
-      sx={{ 
-        height: '100%', 
-        display: 'flex', 
-        flexDirection: 'column',
-        cursor: 'pointer',
-        transition: 'all 0.2s ease-in-out',
-        '&:hover': {
-          transform: 'translateY(-1px)',
-        }
-      }}
-    >
-      <CardContent sx={{ flexGrow: 1 }}>
-        <Box display="flex" alignItems="center" mb={2}>
-          {icon}
-          <Typography variant="h6" component="h3" sx={{ ml: 1 }}>
-            {title}
-          </Typography>
-        </Box>
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button
-          size="small"
-          variant="contained"
-          fullWidth
-          endIcon={<OpenInNew />}
-          onClick={handleClick}
-        >
-          Launch Service
-        </Button>
-      </CardActions>
-    </Card>
-  );
-};
 
 export const DueDiligence: React.FC = () => {
-  const handleNavigateToService = (url: string) => {
-    if (url) {
-      window.open(url, '_blank');
-    } else {
-      console.warn('Service URL not configured');
-    }
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [hasError, setHasError] = React.useState(false);
+
+  const handleIframeLoad = () => {
+    setIsLoading(false);
   };
 
-  const services = [
-    {
-      title: 'Due Diligence Portal',
-      description: 'Access the main due diligence portal with comprehensive deal management, document review, and collaboration tools.',
-      icon: <Assessment color="primary" />,
-      url: serviceConfig.dueDiligencePortalUrl,
-    },
-    {
-      title: 'Portal Management',
-      description: 'Manage portal settings, user access, workflow configurations, and administrative functions.',
-      icon: <Settings color="primary" />,
-      url: serviceConfig.airtablePortalMgmtUrl,
-    },
-  ];
-
-  const missingUrls = services.filter(service => !service.url);
+  const handleIframeError = () => {
+    setIsLoading(false);
+    setHasError(true);
+  };
 
   return (
-    <Container maxWidth="xl">
-      <Box mb={4}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Due Diligence
-        </Typography>
-        <Typography variant="body1" color="text.secondary" paragraph>
-          Access comprehensive due diligence tools and portal management systems. 
-          Manage deals, review documents, and collaborate with stakeholders through integrated platforms.
+    <Container maxWidth="xl" sx={{ height: 'calc(100vh - 120px)' }}>
+      <Box mb={3}>
+        <Box display="flex" alignItems="center" mb={2}>
+          <Assessment color="primary" sx={{ mr: 1, fontSize: 28 }} />
+          <Typography variant="h4" component="h1" gutterBottom>
+            Due Diligence Management
+          </Typography>
+        </Box>
+        <Typography variant="body1" color="text.secondary">
+          Manage due diligence processes, track progress, and collaborate with stakeholders.
         </Typography>
       </Box>
 
-      {missingUrls.length > 0 && (
-        <Alert severity="warning" sx={{ mb: 3 }}>
-          Some services are not configured. Missing URLs for: {missingUrls.map(s => s.title).join(', ')}.
-          Please check your environment variables.
-        </Alert>
-      )}
+      <Paper
+        elevation={0}
+        sx={{
+          height: 'calc(100% - 120px)',
+          position: 'relative',
+          overflow: 'hidden',
+          border: '1px solid #e9ecef',
+        }}
+      >
+        {isLoading && (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            height="200px"
+          >
+            <CircularProgress />
+            <Typography variant="body2" sx={{ ml: 2 }}>
+              Loading Due Diligence Management...
+            </Typography>
+          </Box>
+        )}
 
-      <Grid container spacing={3}>
-        {services.map((service) => (
-          <Grid item xs={12} sm={6} md={6} key={service.title}>
-            <ServiceCard
-              title={service.title}
-              description={service.description}
-              icon={service.icon}
-              url={service.url}
-              onNavigate={handleNavigateToService}
-            />
-          </Grid>
-        ))}
-      </Grid>
+        {hasError && (
+          <Box p={4}>
+            <Alert severity="error">
+              Failed to load the Airtable embed. Please check your internet connection or contact support.
+            </Alert>
+          </Box>
+        )}
+
+        <iframe
+          className="airtable-embed"
+          src="https://airtable.com/embed/appc7SdySCQlOBEnK/shrD2Vw714Ps4Ig8i"
+          title="Due Diligence Management - Airtable"
+          width="100%"
+          height="100%"
+          style={{
+            background: 'transparent',
+            border: '1px solid #ccc',
+            display: hasError ? 'none' : 'block',
+          }}
+          onLoad={handleIframeLoad}
+          onError={handleIframeError}
+        />
+      </Paper>
     </Container>
   );
 };

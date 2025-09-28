@@ -8,7 +8,6 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { Timeline } from '@mui/icons-material';
-import { serviceConfig } from '@/config/services';
 
 export const AcquisitionPipeline: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -23,27 +22,6 @@ export const AcquisitionPipeline: React.FC = () => {
     setHasError(true);
   };
 
-  if (!serviceConfig.airtableFunnelUrl) {
-    return (
-      <Container maxWidth="xl">
-        <Box mb={4}>
-          <Box display="flex" alignItems="center" mb={2}>
-            <Timeline color="primary" sx={{ mr: 1, fontSize: 28 }} />
-            <Typography variant="h4" component="h1" gutterBottom>
-              Acquisition Pipeline
-            </Typography>
-          </Box>
-          <Typography variant="body1" color="text.secondary" paragraph>
-            Track and manage your property acquisition funnel with integrated workflow management.
-          </Typography>
-        </Box>
-
-        <Alert severity="warning" sx={{ mt: 2 }}>
-          Airtable Funnel URL not configured. Please set the VITE_AIRTABLE_FUNNEL_URL environment variable.
-        </Alert>
-      </Container>
-    );
-  }
 
   return (
     <Container maxWidth="xl" sx={{ height: 'calc(100vh - 120px)' }}>
@@ -91,17 +69,18 @@ export const AcquisitionPipeline: React.FC = () => {
         )}
 
         <iframe
-          src={serviceConfig.airtableFunnelUrl}
+          className="airtable-embed"
+          src="https://airtable.com/embed/appJXTi4PasRUaWLN/shrneWCo6T9EQwdei"
           title="Acquisition Pipeline - Airtable"
           width="100%"
           height="100%"
           style={{
-            border: 'none',
+            background: 'transparent',
+            border: '1px solid #ccc',
             display: hasError ? 'none' : 'block',
           }}
           onLoad={handleIframeLoad}
           onError={handleIframeError}
-          allow="clipboard-read; clipboard-write"
         />
       </Paper>
     </Container>
