@@ -8,20 +8,20 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#2c3e50', // Dark blue-grey for professional look
-      light: '#34495e',
-      dark: '#1a252f',
+      main: '#2BBF96', // Genshare teal brand color
+      light: '#5CCFAF',
+      dark: '#20917C',
     },
     secondary: {
-      main: '#27ae60', // Green accent matching the screenshot
-      light: '#2ecc71',
-      dark: '#1e8449',
+      main: '#20917C', // Dark teal accent
+      light: '#2BBF96',
+      dark: '#1A7A68',
       contrastText: '#ffffff',
     },
     success: {
-      main: '#27ae60',
-      light: '#2ecc71',
-      dark: '#1e8449',
+      main: '#2BBF96',
+      light: '#5CCFAF',
+      dark: '#20917C',
     },
     warning: {
       main: '#f39c12',
@@ -58,31 +58,31 @@ export const theme = createTheme({
     fontFamily: '"Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif',
     h1: {
       fontSize: '2.25rem',
-      fontWeight: 600,
+      fontWeight: 700,
       lineHeight: 1.2,
       letterSpacing: '-0.025em',
     },
     h2: {
       fontSize: '1.875rem',
-      fontWeight: 600,
+      fontWeight: 700,
       lineHeight: 1.25,
       letterSpacing: '-0.025em',
     },
     h3: {
       fontSize: '1.5rem',
-      fontWeight: 600,
+      fontWeight: 700,
       lineHeight: 1.3,
       letterSpacing: '-0.025em',
     },
     h4: {
       fontSize: '1.25rem',
-      fontWeight: 600,
+      fontWeight: 700,
       lineHeight: 1.4,
       letterSpacing: '-0.025em',
     },
     h5: {
       fontSize: '1.125rem',
-      fontWeight: 600,
+      fontWeight: 700,
       lineHeight: 1.4,
     },
     h6: {
@@ -143,9 +143,9 @@ export const theme = createTheme({
             borderRadius: '8px',
             margin: '2px 8px',
             '&.Mui-selected': {
-              backgroundColor: '#e8f5e8',
+              backgroundColor: '#E6F7F3',
               '&:hover': {
-                backgroundColor: '#d4edda',
+                backgroundColor: '#CCF0E8',
               },
             },
             '&:hover': {

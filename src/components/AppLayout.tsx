@@ -56,9 +56,24 @@ export const AppLayout: React.FC = () => {
         }}
       >
         <Toolbar>
-          <Typography variant="h5" noWrap component="div" fontWeight={600}>
-            Genshare Unified Dashboard
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box
+              component="img"
+              src="/genshare-logo.svg"
+              alt="Genshare Logo"
+              sx={{
+                height: 32,
+                width: 'auto',
+              }}
+              onError={(e) => {
+                // Fallback if logo doesn't exist
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+            <Typography variant="h5" noWrap component="div" fontWeight={700} color="primary.main">
+              Genshare Unified Dashboard
+            </Typography>
+          </Box>
         </Toolbar>
       </AppBar>
 
