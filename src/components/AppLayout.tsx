@@ -59,7 +59,7 @@ export const AppLayout: React.FC = () => {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Box
               component="img"
-              src="/genshare-logo.svg"
+              src="/genshare-logo.png"
               alt="Genshare Logo"
               sx={{
                 height: 32,
