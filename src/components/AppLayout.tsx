@@ -71,7 +71,7 @@ export const AppLayout: React.FC = () => {
               }}
             />
             <Typography variant="h5" noWrap component="div" fontWeight={700} color="primary.main">
-              Genshare Unified Dashboard
+              Genshare Dashboard
             </Typography>
           </Box>
         </Toolbar>
